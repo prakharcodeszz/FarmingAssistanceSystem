@@ -40,11 +40,6 @@ public class BuyRequestController {
         return buyRequestService.getBuyRequestByProductId(productId);
     }
 
-    @GetMapping("/getByFarmerId/{farmerId}")
-    public List<BuyRequestDetails> getByFarmerId(@PathVariable Long farmerId) {
-        return buyRequestService.getBuyRequestByFarmerId(farmerId);
-    }
-
     @GetMapping("/getBySupplierId/{supplierId}")
     public List<BuyRequestDetails> getBySupplierId(@PathVariable Long supplierId) {
         return buyRequestService.getBuyRequestBySupplier(supplierId);

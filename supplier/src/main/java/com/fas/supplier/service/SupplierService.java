@@ -31,21 +31,27 @@ public class SupplierService implements ISupplierService {
     @Override
     public User loginWithCredentials(LoginCredentials loginCredentials) {
         UserDetails userDetails = suppliersUtil.getUserDetails(loginCredentials.getUsername());
+
         suppliersUtil.isUserSupplier(userDetails);
+
         return suppliersUtil.sendLoginRequest(loginCredentials);
     }
 
     @Override
     public User logout(String username) {
         UserDetails userDetails = suppliersUtil.getUserDetails(username);
+
         suppliersUtil.isUserSupplier(userDetails);
+
         return suppliersUtil.sendLogoutRequest(username);
     }
 
     @Override
     public User changePassword(ChangePasswordRequest changPasswordRequest) {
+
         UserDetails userDetails = suppliersUtil.getUserDetails(changPasswordRequest.getUsername());
         suppliersUtil.isUserSupplier(userDetails);
+
         return suppliersUtil.sendChangePasswordRequest(changPasswordRequest);
     }
 
@@ -53,8 +59,9 @@ public class SupplierService implements ISupplierService {
     public Supplier updateSupplier(UpdateSupplier updateSupplier) {
         UserDetails userDetails = suppliersUtil.getUserDetails(updateSupplier.getUsername());
         suppliersUtil.isUserSupplier(userDetails);
+
         suppliersUtil.isSupplierLoggedIn(userDetails);
-        
+
         List<Supplier> supplierList = suppliersRepository.findByUsername(updateSupplier.getUsername());
         Supplier supplier;
         if (supplierList.isEmpty())
@@ -66,7 +73,6 @@ public class SupplierService implements ISupplierService {
         supplier.setLastName(updateSupplier.getLastName());
         supplier.setPincode(updateSupplier.getPincode());
         supplier.setPhnNumber(updateSupplier.getPhnNumber());
-        logger.info(updateSupplier.toString());
         return suppliersRepository.save(supplier);
     }
 
@@ -79,12 +85,6 @@ public class SupplierService implements ISupplierService {
         UserDetails userDetails = suppliersUtil.getUserDetails(supplier.getUsername());
         suppliersUtil.isSupplierLoggedIn(userDetails);
         return supplier;
-    }
-
-
-    @Override
-    public List<ProductDetails> getProductsByPincode(Long pincode) {
-        return suppliersUtil.getProductsByPincode(pincode);
     }
 
 }

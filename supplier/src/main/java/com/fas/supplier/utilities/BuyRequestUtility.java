@@ -15,6 +15,7 @@ import java.util.List;
 
 @Component
 public class BuyRequestUtility {
+
     @Value("${admins.baseUrl}")
     private String baseAdminsUrl;
     @Value("${farmers.baseUrl}")

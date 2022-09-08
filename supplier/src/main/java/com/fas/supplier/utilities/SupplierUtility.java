@@ -25,10 +25,7 @@ public class SupplierUtility {
 
     @Value("${admins.baseUrl}")
     private String baseAdminsUrl;
-    @Value("${farmers.baseUrl}")
-    private String baseFarmersUrl;
-    @Value("${products.baseUrl}")
-    private String baseProductsUrl;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -47,7 +44,6 @@ public class SupplierUtility {
     public User sendChangePasswordRequest(ChangePasswordRequest changePasswordRequest) {
         String url = baseAdminsUrl + "/changePassword";
         ResponseEntity<User> result = restTemplate.postForEntity(url, changePasswordRequest, User.class);
-        logger.info(result.toString());
         return result.getBody();
     }
 
@@ -75,12 +71,4 @@ public class SupplierUtility {
             throw new SupplierLoggedOutException("Supplier for username is not logged in: " + userDetails.getUsername());
     }
 
-    public List<ProductDetails> getProductsByPincode(Long pincode) {
-        String url = baseProductsUrl +"/findByPincode/" +pincode;
-        ResponseEntity<ProductDetails[]> result = restTemplate.getForEntity(url, ProductDetails[].class);
-        ProductDetails[] arrayList = result.getBody();
-        List<ProductDetails> productDetailsList = new ArrayList<>();
-        Collections.addAll(productDetailsList, arrayList);
-        return productDetailsList;
-    }
 }

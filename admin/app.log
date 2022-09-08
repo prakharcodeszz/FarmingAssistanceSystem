@@ -57,3 +57,46 @@
 2022-09-08 10:59:15.014  INFO 8600 --- [http-nio-8000-exec-2] com.fas.admin.AdminApplication           : peeyusharma
 2022-09-08 11:02:57.988  INFO 8600 --- [http-nio-8000-exec-4] com.fas.admin.AdminApplication           : peeyusharma
 2022-09-08 11:04:00.423  INFO 8600 --- [http-nio-8000-exec-9] com.fas.admin.AdminApplication           : peeyusharma
+2022-09-08 11:43:54.248  INFO 14464 --- [main] com.fas.admin.AdminApplication           : Starting AdminApplication using Java 11.0.13 on PotatoLapy with PID 14464 (C:\Users\singh\Desktop\Workspace\FAS\admin\build\classes\java\main started by singh in C:\Users\singh\Desktop\Workspace\FAS\admin)
+2022-09-08 11:43:54.251  INFO 14464 --- [main] com.fas.admin.AdminApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-09-08 11:43:56.599  INFO 14464 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-08 11:43:56.599  INFO 14464 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-08 11:43:56.754  INFO 14464 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-08 11:43:57.331  INFO 14464 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-08 11:43:57.549  INFO 14464 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-08 11:44:00.915  INFO 14464 --- [main] com.fas.admin.AdminApplication           : Started AdminApplication in 7.232 seconds (JVM running for 7.849)
+2022-09-08 11:44:15.570  INFO 14464 --- [http-nio-8000-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-08 11:44:16.070  INFO 14464 --- [http-nio-8000-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 381 ms
+2022-09-08 13:32:31.228  INFO 13980 --- [main] com.fas.admin.AdminApplication           : Starting AdminApplication using Java 11.0.13 on PotatoLapy with PID 13980 (C:\Users\singh\Desktop\Workspace\FAS\admin\build\classes\java\main started by singh in C:\Users\singh\Desktop\Workspace\FAS\admin)
+2022-09-08 13:32:31.246  INFO 13980 --- [main] com.fas.admin.AdminApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-09-08 13:32:38.979  INFO 13980 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-08 13:32:38.979  INFO 13980 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-08 13:32:39.403  INFO 13980 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-08 13:32:40.925  INFO 13980 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-08 13:32:41.459  INFO 13980 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-08 13:32:47.486  INFO 13980 --- [main] com.fas.admin.AdminApplication           : Started AdminApplication in 17.386 seconds (JVM running for 19.009)
+2022-09-08 13:32:47.938  INFO 13980 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-08 13:32:49.052  INFO 13980 --- [http-nio-8000-exec-7] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 532 ms
+2022-09-08 14:01:48.501  INFO 12268 --- [main] com.fas.admin.AdminApplication           : Starting AdminApplication using Java 11.0.13 on PotatoLapy with PID 12268 (C:\Users\singh\Desktop\Workspace\FAS\admin\build\classes\java\main started by singh in C:\Users\singh\Desktop\Workspace\FAS\admin)
+2022-09-08 14:01:48.510  INFO 12268 --- [main] com.fas.admin.AdminApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-09-08 14:01:51.270  INFO 12268 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-08 14:01:51.272  INFO 12268 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-08 14:01:51.666  INFO 12268 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-08 14:01:53.340  INFO 12268 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-08 14:01:53.882  INFO 12268 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-08 14:02:00.539  INFO 12268 --- [main] com.fas.admin.AdminApplication           : Started AdminApplication in 12.63 seconds (JVM running for 13.224)
+2022-09-08 14:02:35.984  INFO 12268 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-08 14:02:36.790  INFO 12268 --- [http-nio-8000-exec-5] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 472 ms
+2022-09-08 14:11:30.083  WARN 12268 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m5s803ms395µs).
+2022-09-08 14:48:20.763  INFO 14640 --- [main] com.fas.admin.AdminApplication           : Starting AdminApplication using Java 11.0.13 on PotatoLapy with PID 14640 (C:\Users\singh\Desktop\Workspace\FAS\admin\build\classes\java\main started by singh in C:\Users\singh\Desktop\Workspace\FAS\admin)
+2022-09-08 14:48:20.794  INFO 14640 --- [main] com.fas.admin.AdminApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-09-08 14:48:27.456  INFO 14640 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-08 14:48:27.456  INFO 14640 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-08 14:48:27.786  INFO 14640 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-08 14:48:30.185  INFO 14640 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-08 14:48:30.652  INFO 14640 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-08 14:48:42.212  INFO 14640 --- [main] com.fas.admin.AdminApplication           : Started AdminApplication in 22.923 seconds (JVM running for 24.503)
+2022-09-08 14:49:14.218  INFO 14640 --- [http-nio-8000-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-08 14:49:14.782  INFO 14640 --- [http-nio-8000-exec-5] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 392 ms
+2022-09-08 15:01:16.220  INFO 14640 --- [http-nio-8000-exec-2] com.fas.admin.AdminApplication           : prateek100
+2022-09-08 15:01:35.278  INFO 14640 --- [http-nio-8000-exec-6] com.fas.admin.AdminApplication           : prateek100

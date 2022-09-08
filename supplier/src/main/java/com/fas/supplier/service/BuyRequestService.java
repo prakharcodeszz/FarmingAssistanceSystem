@@ -30,7 +30,6 @@ import java.util.Optional;
 @Transactional
 public class BuyRequestService implements IBuyRequestService {
 
-
     Logger logger = LoggerFactory.getLogger(SupplierApplication.class);
 
     @Autowired
@@ -58,7 +57,6 @@ public class BuyRequestService implements IBuyRequestService {
         buyRequest.setRequestStatus(RequestStatus.PENDING);
         buyRequestRepository.save(buyRequest);
 
-
         return buyRequestUtility.toBuyRequestDetails(buyRequest, supplier);
     }
 
@@ -66,6 +64,7 @@ public class BuyRequestService implements IBuyRequestService {
     public BuyRequestDetails getBuyRequestsById(Long buyRequestId) {
         BuyRequest buyRequest = getBuyRequestFromId(buyRequestId);
         Supplier supplier = getSupplierFromId(buyRequest.getSupplierId());
+
         UserDetails userDetails = suppliersUtil.getUserDetails(supplier.getUsername());
         suppliersUtil.isSupplierLoggedIn(userDetails);
 
@@ -77,21 +76,6 @@ public class BuyRequestService implements IBuyRequestService {
         List<BuyRequest> buyRequestList = buyRequestRepository.getBuyRequestByProductId(productId);
         if(buyRequestList.isEmpty())
             throw new ProductNotFoundException("Product not found for id: "+productId);
-
-        List<BuyRequestDetails> buyRequestDetailsList = new ArrayList<>();
-        for (BuyRequest buyRequest : buyRequestList) {
-            Supplier supplier = getSupplierFromId(buyRequest.getSupplierId());
-            BuyRequestDetails buyRequestDetails = buyRequestUtility.toBuyRequestDetails(buyRequest, supplier);
-            buyRequestDetailsList.add(buyRequestDetails);
-        }
-        return buyRequestDetailsList;
-    }
-
-    @Override
-    public List<BuyRequestDetails> getBuyRequestByFarmerId(Long farmerId) {
-        List<BuyRequest> buyRequestList = buyRequestRepository.getBuyRequestByFarmerId(farmerId);
-        if(buyRequestList.isEmpty())
-            throw new FarmerNotFoundException("No farmer found for id: " + farmerId);
 
         List<BuyRequestDetails> buyRequestDetailsList = new ArrayList<>();
         for (BuyRequest buyRequest : buyRequestList) {

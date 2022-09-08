@@ -23,7 +23,7 @@ public class FarmerService implements IFarmersService {
     private FarmersUtil farmersUtil;
 
     @Autowired
-    private IFarmersRepository farmersrepository;
+    private IFarmersRepository farmersRepository;
     @Autowired
     private IComplaintRepository complaintRepository;
 
@@ -53,7 +53,7 @@ public class FarmerService implements IFarmersService {
         UserDetails userDetails = farmersUtil.getUserDetails(updateFarmer.getUsername());
         farmersUtil.isUserFarmer(userDetails);
         farmersUtil.isFarmerLoggedIn(userDetails);
-        List<Farmer> farmersList = farmersrepository.findByUsername(updateFarmer.getUsername());
+        List<Farmer> farmersList = farmersRepository.findByUsername(updateFarmer.getUsername());
         Farmer farmer;
         if (farmersList.isEmpty())
             farmer = new Farmer();
@@ -64,12 +64,12 @@ public class FarmerService implements IFarmersService {
         farmer.setLastName(updateFarmer.getLastName());
         farmer.setPincode(updateFarmer.getPincode());
         farmer.setPhnNumber(updateFarmer.getPhnNumber());
-        return farmersrepository.save(farmer);
+        return farmersRepository.save(farmer);
     }
 
     @Override
     public Farmer getFarmerById(Long farmerId) {
-        Optional<Farmer> farmerOptional = farmersrepository.findById(farmerId);
+        Optional<Farmer> farmerOptional = farmersRepository.findById(farmerId);
         if (!farmerOptional.isPresent())
             throw new FarmerNotFoundException("No farmer found for id: " + farmerId);
         Farmer farmer = farmerOptional.get();
@@ -80,7 +80,7 @@ public class FarmerService implements IFarmersService {
 
     @Override
     public Complaint addComplaint(AddComplaintRequest addComplaintRequest) {
-        Optional<Farmer> farmerOptional = farmersrepository.findById(addComplaintRequest.getFarmerId());
+        Optional<Farmer> farmerOptional = farmersRepository.findById(addComplaintRequest.getFarmerId());
         if (!farmerOptional.isPresent())
             throw new FarmerNotFoundException("Farmer not found for id: " + addComplaintRequest.getFarmerId());
         Farmer farmer = farmerOptional.get();

@@ -22,7 +22,6 @@ public class SupplierController {
     @Autowired
     private IBuyRequestService buyRequestService;
 
-
     @PostMapping("/login")
     public User login(@Valid @RequestBody LoginCredentials loginCredentials) {
         return supplierService.loginWithCredentials(loginCredentials);
@@ -41,10 +40,5 @@ public class SupplierController {
     @PostMapping("/updateSupplier")
     public Supplier updateSupplier(@Valid @RequestBody UpdateSupplier updateSupplier){
         return supplierService.updateSupplier(updateSupplier);
-    }
-
-    @GetMapping("/products/byPincode/{pincode}")
-    public List<ProductDetails> getProductsByPincode(@PathVariable Long pincode){
-        return supplierService.getProductsByPincode(pincode);
     }
 }

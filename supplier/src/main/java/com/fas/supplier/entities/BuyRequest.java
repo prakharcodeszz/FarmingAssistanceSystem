@@ -1,6 +1,7 @@
 package com.fas.supplier.entities;
 
 import com.fas.supplier.constants.RequestStatus;
+import com.sun.org.apache.xpath.internal.operations.String;
 
 import javax.persistence.*;
 
@@ -16,6 +17,7 @@ public class BuyRequest {
     @Column(nullable = false)
     private Double askedPrice;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;
 
     public Long getId() {
@@ -58,14 +60,5 @@ public class BuyRequest {
         this.requestStatus = requestStatus;
     }
 
-    @Override
-    public String toString() {
-        return "BuyRequest{" +
-                "id=" + id +
-                ", productId=" + productId +
-                ", supplierId=" + supplierId +
-                ", askedPrice=" + askedPrice +
-                ", requestStatus=" + requestStatus +
-                '}';
-    }
+
 }

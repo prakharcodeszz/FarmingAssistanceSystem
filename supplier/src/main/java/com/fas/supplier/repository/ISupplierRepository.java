@@ -14,4 +14,5 @@ public interface ISupplierRepository extends JpaRepository<Supplier, Long> {
 
     @Query("FROM Supplier WHERE username = :username")
     List<Supplier> findByUsername(@Param("username") String username);
+
 }
