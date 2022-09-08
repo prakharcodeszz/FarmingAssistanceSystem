@@ -49,14 +49,14 @@ public class FarmersUtil {
         return result.getBody();
     }
 
-    public List<Supplier> getNearbySuppliers(Long pincode) {
-        String url = baseSuppliersUrl +"/getByPincode/" +pincode;
-        ResponseEntity<Supplier[]> result = restTemplate.getForEntity(url, Supplier[].class);
-        Supplier[] arrayList = result.getBody();
-        List<Supplier> suppliersList = new ArrayList<>();
-        Collections.addAll(suppliersList, arrayList);
-        return suppliersList;
-    }
+//    public List<Supplier> getNearbySuppliers(Long pincode) {
+//        String url = baseSuppliersUrl +"/getByPincode/" +pincode;
+//        ResponseEntity<Supplier[]> result = restTemplate.getForEntity(url, Supplier[].class);
+//        Supplier[] arrayList = result.getBody();
+//        List<Supplier> suppliersList = new ArrayList<>();
+//        Collections.addAll(suppliersList, arrayList);
+//        return suppliersList;
+//    }
 
     public UserType getUserType(String userType) {
         for (UserType type : UserType.values())

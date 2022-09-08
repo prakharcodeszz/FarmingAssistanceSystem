@@ -4,26 +4,23 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class AddProductRequest{
+public class UpdateProductRequest {
 
-    @NotBlank
-    private String name;
+    @NotNull
+    private Long productId;
     @NotNull
     @Min(1)
     private Long quantity;
     @NotNull
     @Min(1)
     private Double sellingPrice;
-    @NotNull
-    @Min(1)
-    private Long farmerId;
 
-    public String getName() {
-        return name;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public Long getQuantity() {
@@ -41,12 +38,6 @@ public class AddProductRequest{
     public void setSellingPrice(Double sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
-
-    public Long getFarmerId() {
-        return farmerId;
-    }
-
-    public void setFarmerId(Long farmerId) {
-        this.farmerId = farmerId;
-    }
 }
+
+

@@ -2,7 +2,8 @@ package com.fas.farmer.service;
 
 import com.fas.farmer.dtos.AddProductRequest;
 import com.fas.farmer.dtos.ProductDetails;
-import com.fas.farmer.entities.BuyRequest;
+import com.fas.farmer.dtos.SellProductRequest;
+import com.fas.farmer.dtos.UpdateProductRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -18,8 +19,11 @@ public interface IProductService {
 
     ProductDetails getProductDetails(@Min(1) Long productId);
 
+    ProductDetails updateProduct(@Valid UpdateProductRequest updateProduct);
+
+    ProductDetails sellProduct(@Valid SellProductRequest sellProduct);
+
     List<ProductDetails> getProductsByPincode(@Min(1) @Max(999999) Long pincode);
 
     List<ProductDetails> getProductsByFarmerId(@Min(1) Long farmerId);
-
 }

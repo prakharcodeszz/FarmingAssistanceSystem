@@ -16,34 +16,13 @@ public class Product {
     private Long quantity;
     @Column(nullable = false)
     @Min(0)
-    private Double price;
+    private Double sellingPrice;
     @Column(nullable = false)
     private Long farmerId;
+    @Column(nullable = true)
     private Long supplierId;
-
-    public Product(String name, Long quantity, Double price, Long farmerId, Long supplierId) {
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.farmerId = farmerId;
-        this.supplierId = supplierId;
-    }
-
-    public Product() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return id.equals(product.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    @Column(nullable = true)
+    private Double buyingPrice;
 
     public Long getId() {
         return id;
@@ -69,12 +48,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getSellingPrice() {
+        return sellingPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setSellingPrice(Double sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
 
     public Long getFarmerId() {
@@ -91,5 +70,13 @@ public class Product {
 
     public void setSupplierId(Long supplierId) {
         this.supplierId = supplierId;
+    }
+
+    public Double getBuyingPrice() {
+        return buyingPrice;
+    }
+
+    public void setBuyingPrice(Double buyingPrice) {
+        this.buyingPrice = buyingPrice;
     }
 }

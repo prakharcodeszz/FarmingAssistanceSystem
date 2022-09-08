@@ -1,7 +1,6 @@
 package com.fas.farmer.service;
 
 import com.fas.farmer.dtos.*;
-import com.fas.farmer.entities.BuyRequest;
 import com.fas.farmer.entities.Complaint;
 import com.fas.farmer.entities.Farmer;
 import org.hibernate.validator.constraints.Length;
@@ -9,9 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.util.List;
 
 @Validated
 @Service
@@ -25,6 +22,7 @@ public interface IFarmersService {
 
     Farmer updateFarmer(@Valid UpdateFarmer updateFarmer);
 
-    List<Supplier> getNearbySupplier(Long pincode);
+    Farmer getFarmerById(@Min(1) Long farmerId);
 
+    Complaint addComplaint(@Valid AddComplaintRequest addComplaintRequest);
 }

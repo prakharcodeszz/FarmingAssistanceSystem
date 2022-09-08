@@ -1,19 +1,16 @@
 package com.fas.farmer.controller;
 
 import com.fas.farmer.dtos.*;
-import com.fas.farmer.entities.BuyRequest;
 import com.fas.farmer.entities.Complaint;
 import com.fas.farmer.entities.Farmer;
-import com.fas.farmer.service.IBuyRequestService;
-import com.fas.farmer.service.IComplaintService;
 import com.fas.farmer.service.IFarmersService;
-import com.fas.farmer.service.IProductService;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/farmers")
@@ -22,12 +19,7 @@ public class FarmersController {
 
     @Autowired
     private IFarmersService farmerService;
-    @Autowired
-    private IProductService productService;
-    @Autowired
-    private IBuyRequestService buyRequestService;
-    @Autowired
-    private IComplaintService complaintService;
+
 
     @PostMapping("/login")
     public User login(@Valid @RequestBody LoginCredentials loginCredentials) {
@@ -35,7 +27,7 @@ public class FarmersController {
     }
 
     @GetMapping("/logout/{username}")
-    public User logout(@PathVariable String username) {
+    public User logout(@PathVariable @Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16") String username) {
         return farmerService.logout(username);
     }
 
@@ -49,42 +41,13 @@ public class FarmersController {
         return farmerService.updateFarmer(updateFarmer);
     }
 
-    @PostMapping("/products/add")
-    public ProductDetails addProducts(@Valid @RequestBody AddProductRequest addProductRequest){
-        return productService.addProduct(addProductRequest);
+    @GetMapping("/findById/{farmerId}")
+    public Farmer getById(@PathVariable @Min(1) Long farmerId) {
+        return farmerService.getFarmerById(farmerId);
     }
 
-    @GetMapping("/products/getById/{productId}")
-    public ProductDetails getProductById(@PathVariable Long productId){
-        return productService.getProductDetails(productId);
+    @PostMapping("/raiseComplaint")
+    public Complaint addComplaint(@Valid @RequestBody AddComplaintRequest addComplaintRequest) {
+        return farmerService.addComplaint(addComplaintRequest);
     }
-    @GetMapping("/products/findByPincode/{pincode}")
-    public List<ProductDetails> getProductsByPincode(@PathVariable Long pincode){
-        return productService.getProductsByPincode(pincode);
-    }
-
-    @GetMapping("/products/byFarmerId/{farmerId}")
-    public List<ProductDetails> getProductsByFarmerId(@PathVariable Long farmerId){
-        return productService.getProductsByFarmerId(farmerId);
-    }
-    @GetMapping("/getBuyRequests/{productId}")
-    public List<BuyRequest> getBuyRequests(@PathVariable Long productId){
-        return buyRequestService.getBuyRequests(productId);
-    }
-
-    @GetMapping("/acceptRequest/{buyRequestId}")
-    public BuyRequest acceptRequest(@PathVariable Long buyRequestId){
-        return buyRequestService.acceptRequest(buyRequestId);
-    }
-
-    @GetMapping("/rejectRequest/{buyRequestId}")
-    public BuyRequest rejectRequest(@PathVariable Long buyRequestId){
-        return buyRequestService.rejectRequest(buyRequestId);
-    }
-
-    @PostMapping("/complaints/raise")
-    public Complaint addComplaint(@Valid @RequestBody AddComplaintRequest addComplaintRequest){
-        return complaintService.addComplaint(addComplaintRequest);
-    }
-
 }

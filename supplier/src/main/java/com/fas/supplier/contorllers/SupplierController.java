@@ -2,6 +2,7 @@ package com.fas.supplier.contorllers;
 
 import com.fas.supplier.dtos.*;
 import com.fas.supplier.entities.Supplier;
+import com.fas.supplier.service.IBuyRequestService;
 import com.fas.supplier.service.ISupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -16,30 +17,34 @@ import java.util.List;
 public class SupplierController {
 
     @Autowired
-    private ISupplierService service;
+    private ISupplierService supplierService;
+
+    @Autowired
+    private IBuyRequestService buyRequestService;
+
 
     @PostMapping("/login")
     public User login(@Valid @RequestBody LoginCredentials loginCredentials) {
-        return service.loginWithCredentials(loginCredentials);
+        return supplierService.loginWithCredentials(loginCredentials);
     }
 
     @GetMapping("/logout/{username}")
     public User logout(@PathVariable String username) {
-        return service.logout(username);
+        return supplierService.logout(username);
     }
 
     @PostMapping("/changePassword")
     public User changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
-        return service.changePassword(changePasswordRequest);
+        return supplierService.changePassword(changePasswordRequest);
     }
 
     @PostMapping("/updateSupplier")
     public Supplier updateSupplier(@Valid @RequestBody UpdateSupplier updateSupplier){
-        return service.updateSupplier(updateSupplier);
+        return supplierService.updateSupplier(updateSupplier);
     }
 
-    @GetMapping("/products/byPicode/{pincode}")
+    @GetMapping("/products/byPincode/{pincode}")
     public List<ProductDetails> getProductsByPincode(@PathVariable Long pincode){
-        return service.getProductsByPincode(pincode);
+        return supplierService.getProductsByPincode(pincode);
     }
 }

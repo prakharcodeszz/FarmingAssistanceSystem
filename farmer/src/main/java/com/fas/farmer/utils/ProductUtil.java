@@ -25,33 +25,27 @@ public class ProductUtil {
         ProductDetails productDetails = new ProductDetails();
         productDetails.setId(product.getId());
         productDetails.setName(product.getName());
-        productDetails.setPrice(product.getPrice());
+        productDetails.setSellingPrice(product.getSellingPrice());
+        productDetails.setBuyingPrice(product.getBuyingPrice());
         productDetails.setQuantity(product.getQuantity());
+        productDetails.setFarmerId(product.getFarmerId());
         productDetails.setFarmerFirstName(farmer.getFirstName());
         productDetails.setFarmerLastName(farmer.getLastName());
-        productDetails.setPincode(farmer.getPincode());
-        productDetails.setPhnNumber(farmer.getPhnNumber());
+        productDetails.setFarmerPincode(farmer.getPincode());
+        productDetails.setFarmerPhnNumber(farmer.getPhnNumber());
+        productDetails.setSupplierId(product.getSupplierId());
+
+//        productDetails.setSupplierFirstName(farmer.getSupplierFirstName());
+//        productDetails.setSupplierLastName(farmer.getSupplierLastName());
+//        productDetails.setSupplierPincode(farmer.getSupplierPincode());
+//        productDetails.setSupplierPhnNumber(farmer.getSupplierPhnNumber());
         return productDetails;
     }
 
     public List<ProductDetails> toProductDetailsList(List<Product> productList) {
         List<ProductDetails> productDetailsList = new ArrayList<>();
         for(Product product : productList){
-            Optional<Farmer> farmerOptional = farmersRepository.findById(product.getFarmerId());
-            if(!farmerOptional.isPresent())
-                continue;
-            Farmer farmer =  farmerOptional.get();
-            ProductDetails productDetails = new ProductDetails();
-            productDetails.setId(product.getId());
-            productDetails.setName(product.getName());
-            productDetails.setPrice(product.getPrice());
-            productDetails.setQuantity(product.getQuantity());
-            productDetails.setFarmerFirstName(farmer.getFirstName());
-            productDetails.setFarmerLastName(farmer.getLastName());
-            productDetails.setPincode(farmer.getPincode());
-            productDetails.setPhnNumber(farmer.getPhnNumber());
-
-            productDetailsList.add(productDetails);
+            productDetailsList.add(toProductDetails(product));
         }
         return productDetailsList;
     }

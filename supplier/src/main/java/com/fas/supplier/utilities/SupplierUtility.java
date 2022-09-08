@@ -27,7 +27,8 @@ public class SupplierUtility {
     private String baseAdminsUrl;
     @Value("${farmers.baseUrl}")
     private String baseFarmersUrl;
-
+    @Value("${products.baseUrl}")
+    private String baseProductsUrl;
     @Autowired
     private RestTemplate restTemplate;
 
@@ -53,7 +54,6 @@ public class SupplierUtility {
     public UserDetails getUserDetails(String username) {
         String url = baseAdminsUrl + "/getUserDetails/" + username;
         ResponseEntity<UserDetails> result = restTemplate.getForEntity(url, UserDetails.class);
-        logger.info(result.getBody().toString());
         return result.getBody();
     }
 
@@ -76,7 +76,7 @@ public class SupplierUtility {
     }
 
     public List<ProductDetails> getProductsByPincode(Long pincode) {
-        String url = baseFarmersUrl +"/products/findByPincode/" +pincode;
+        String url = baseProductsUrl +"/findByPincode/" +pincode;
         ResponseEntity<ProductDetails[]> result = restTemplate.getForEntity(url, ProductDetails[].class);
         ProductDetails[] arrayList = result.getBody();
         List<ProductDetails> productDetailsList = new ArrayList<>();

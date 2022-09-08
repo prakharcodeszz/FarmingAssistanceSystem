@@ -1,10 +1,7 @@
 package com.fas.supplier.contorllers;
 
 import com.fas.supplier.SupplierApplication;
-import com.fas.supplier.exceptions.FarmerNotFoundException;
-import com.fas.supplier.exceptions.InvalidUserTypeException;
-import com.fas.supplier.exceptions.SupplierLoggedOutException;
-import com.fas.supplier.exceptions.SupplierNotFoundException;
+import com.fas.supplier.exceptions.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -41,6 +38,18 @@ public class CentralizedExceptionHandler {
         return e.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(BuyRequestIdNotFoundException.class)
+    public String handleBuyRequestIdNotFoundException(BuyRequestIdNotFoundException e) {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ProductNotFoundException.class)
+    public String handleProductNotFoundException(ProductNotFoundException e) {
+        return e.getMessage();
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidUserTypeException.class)
     public String handleInvalidUserTypeException(InvalidUserTypeException e) {
@@ -52,7 +61,6 @@ public class CentralizedExceptionHandler {
     public String handleSupplierLoggedOutException(SupplierLoggedOutException e) {
         return e.getMessage();
     }
-
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({ConstraintViolationException.class, MethodArgumentNotValidException.class, UnknownHostException.class, HttpClientErrorException.class})

@@ -10,6 +10,17 @@ import java.util.Objects;
 
 public class UpdateFarmer {
 
+    @NotNull
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16")
     private String username;
     @Length(min=4, max=16, message = "First name must be b/w 4 and 16")

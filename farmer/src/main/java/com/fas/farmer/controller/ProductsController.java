@@ -1,0 +1,69 @@
+package com.fas.farmer.controller;
+
+import com.fas.farmer.dtos.*;
+import com.fas.farmer.service.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@RestController
+@RequestMapping("/products")
+@Validated
+public class ProductsController {
+
+    @Autowired
+    private IProductService productService;
+
+    @PostMapping("/add")
+    public ProductDetails addProducts(@Valid @RequestBody AddProductRequest addProductRequest) {
+        return productService.addProduct(addProductRequest);
+    }
+
+    @PostMapping("/update")
+    public ProductDetails updateProduct(@Valid @RequestBody UpdateProductRequest updateProductRequest) {
+        return productService.updateProduct(updateProductRequest);
+    }
+
+    @PostMapping("/sellProduct")
+    public ProductDetails sellProduct(@Valid @RequestBody SellProductRequest sellProductRequest) {
+        return productService.sellProduct(sellProductRequest);
+    }
+
+    @GetMapping("/findById/{productId}")
+    public ProductDetails getProductById(@PathVariable Long productId) {
+        return productService.getProductDetails(productId);
+    }
+    @GetMapping("/findByPincode/{pincode}")
+    public List<ProductDetails> getProductsByPincode(@PathVariable Long pincode) {
+        return productService.getProductsByPincode(pincode);
+    }
+
+    @GetMapping("/findByFarmerId/{farmerId}")
+    public List<ProductDetails> getProductsByFarmerId(@PathVariable Long farmerId) {
+        return productService.getProductsByFarmerId(farmerId);
+    }
+
+
+
+
+//    @GetMapping("/getBuyRequests/{productId}")
+//    public List<BuyRequest> getBuyRequests(@PathVariable Long productId) {
+//        return buyRequestService.getBuyRequests(productId);
+//    }
+//
+//    @GetMapping("/acceptRequest/{buyRequestId}")
+//    public BuyRequest acceptRequest(@PathVariable Long buyRequestId) {
+//        return buyRequestService.acceptRequest(buyRequestId);
+//    }
+//
+//    @GetMapping("/rejectRequest/{buyRequestId}")
+//    public BuyRequest rejectRequest(@PathVariable Long buyRequestId) {
+//        return buyRequestService.rejectRequest(buyRequestId);
+//    }
+//
+
+
+}

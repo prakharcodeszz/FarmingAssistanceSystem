@@ -5,7 +5,6 @@ import com.fas.admin.constants.UserType;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.util.Objects;
 
 /**
@@ -26,7 +25,6 @@ public class User {
     @Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16")
     private String username;
     @Column(nullable = false)
-    @Min(value = 8, message = "Password should be of length b/w 6 and 16")
     @Length(min = 8, max = 16, message = "Password should be of length b/w 6 and 16")
     private String password;
     @Column(nullable = false)

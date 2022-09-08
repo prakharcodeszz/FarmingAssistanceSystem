@@ -1,20 +1,13 @@
 package com.fas.farmer.service;
 
 import com.fas.farmer.constants.ComplaintStatus;
-import com.fas.farmer.constants.RequestStatus;
 import com.fas.farmer.dtos.*;
-import com.fas.farmer.entities.BuyRequest;
 import com.fas.farmer.entities.Complaint;
 import com.fas.farmer.entities.Farmer;
-import com.fas.farmer.entities.Product;
-import com.fas.farmer.exceptions.BuyRequestNotFoundException;
 import com.fas.farmer.exceptions.FarmerNotFoundException;
-import com.fas.farmer.repository.IBuyRequestsRepository;
 import com.fas.farmer.repository.IComplaintRepository;
 import com.fas.farmer.repository.IFarmersRepository;
-import com.fas.farmer.repository.IProductRepository;
 import com.fas.farmer.utils.FarmersUtil;
-import com.fas.farmer.utils.ProductUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +24,8 @@ public class FarmerService implements IFarmersService {
 
     @Autowired
     private IFarmersRepository farmersrepository;
+    @Autowired
+    private IComplaintRepository complaintRepository;
 
     @Override
     public User loginWithCredentials(LoginCredentials loginCredentials) {
@@ -72,9 +67,32 @@ public class FarmerService implements IFarmersService {
         return farmersrepository.save(farmer);
     }
 
+    @Override
+    public Farmer getFarmerById(Long farmerId) {
+        Optional<Farmer> farmerOptional = farmersrepository.findById(farmerId);
+        if (!farmerOptional.isPresent())
+            throw new FarmerNotFoundException("No farmer found for id: " + farmerId);
+        Farmer farmer = farmerOptional.get();
+        UserDetails userDetails = farmersUtil.getUserDetails(farmer.getUsername());
+        farmersUtil.isFarmerLoggedIn(userDetails);
+        return farmer;
+    }
 
     @Override
-    public List<Supplier> getNearbySupplier(Long pincode) {
-        return farmersUtil.getNearbySuppliers(pincode);
+    public Complaint addComplaint(AddComplaintRequest addComplaintRequest) {
+        Optional<Farmer> farmerOptional = farmersrepository.findById(addComplaintRequest.getFarmerId());
+        if (!farmerOptional.isPresent())
+            throw new FarmerNotFoundException("Farmer not found for id: " + addComplaintRequest.getFarmerId());
+        Farmer farmer = farmerOptional.get();
+        UserDetails userDetails = farmersUtil.getUserDetails(farmer.getUsername());
+        farmersUtil.isFarmerLoggedIn(userDetails);
+
+
+        Complaint complaint = new Complaint();
+        complaint.setFarmerId(addComplaintRequest.getFarmerId());
+        complaint.setComplaintDescription(addComplaintRequest.getComplaintDescription());
+        complaint.setStatus(ComplaintStatus.UNRESOLVED);
+        return complaintRepository.save(complaint);
     }
+
 }

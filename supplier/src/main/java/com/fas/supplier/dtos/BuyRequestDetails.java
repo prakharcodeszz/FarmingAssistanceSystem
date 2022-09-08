@@ -8,10 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 public class BuyRequestDetails {
+
+    private Long id;
+    private Double askedPrice;
+    private String requestStatus;
+
     private Long productId;
     private String productName;
-    private Long productQuantity;
-    private double productPrice;
+    private Long productquantity;
+    private Double sellingPrice;
+    private Double buyingPrice;
 
     private Long farmerId;
     private String farmerFirstName;
@@ -19,10 +25,35 @@ public class BuyRequestDetails {
     private Long farmerPincode;
     private String farmerPhnNumber;
 
-    private Long buyRequestId;
     private Long supplierId;
-    private Double askedPrice;
-    private String requestStatus;
+    private String supplierFirstName;
+    private String supplierLastName;
+    private Long supplierPincode;
+    private String supplierPhnNumber;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getAskedPrice() {
+        return askedPrice;
+    }
+
+    public void setAskedPrice(Double askedPrice) {
+        this.askedPrice = askedPrice;
+    }
+
+    public String getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(String requestStatus) {
+        this.requestStatus = requestStatus;
+    }
 
     public Long getProductId() {
         return productId;
@@ -40,20 +71,28 @@ public class BuyRequestDetails {
         this.productName = productName;
     }
 
-    public Long getProductQuantity() {
-        return productQuantity;
+    public Long getProductquantity() {
+        return productquantity;
     }
 
-    public void setProductQuantity(Long productQuantity) {
-        this.productQuantity = productQuantity;
+    public void setProductquantity(Long productquantity) {
+        this.productquantity = productquantity;
     }
 
-    public double getProductPrice() {
-        return productPrice;
+    public Double getSellingPrice() {
+        return sellingPrice;
     }
 
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
+    public void setSellingPrice(Double sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
+
+    public Double getBuyingPrice() {
+        return buyingPrice;
+    }
+
+    public void setBuyingPrice(Double buyingPrice) {
+        this.buyingPrice = buyingPrice;
     }
 
     public Long getFarmerId() {
@@ -96,14 +135,6 @@ public class BuyRequestDetails {
         this.farmerPhnNumber = farmerPhnNumber;
     }
 
-    public Long getBuyRequestId() {
-        return buyRequestId;
-    }
-
-    public void setBuyRequestId(Long buyRequestId) {
-        this.buyRequestId = buyRequestId;
-    }
-
     public Long getSupplierId() {
         return supplierId;
     }
@@ -112,19 +143,37 @@ public class BuyRequestDetails {
         this.supplierId = supplierId;
     }
 
-    public Double getAskedPrice() {
-        return askedPrice;
+    public String getSupplierFirstName() {
+        return supplierFirstName;
     }
 
-    public void setAskedPrice(Double askedPrice) {
-        this.askedPrice = askedPrice;
+    public void setSupplierFirstName(String supplierFirstName) {
+        this.supplierFirstName = supplierFirstName;
     }
 
-    public String getRequestStatus() {
-        return requestStatus;
+    public String getSupplierLastName() {
+        return supplierLastName;
     }
 
-    public void setRequestStatus(String requestStatus) {
-        this.requestStatus = requestStatus;
+    public void setSupplierLastName(String supplierLastName) {
+        this.supplierLastName = supplierLastName;
     }
+
+    public Long getSupplierPincode() {
+        return supplierPincode;
+    }
+
+    public void setSupplierPincode(Long supplierPincode) {
+        this.supplierPincode = supplierPincode;
+    }
+
+    public String getSupplierPhnNumber() {
+        return supplierPhnNumber;
+    }
+
+    public void setSupplierPhnNumber(String supplierPhnNumber) {
+        this.supplierPhnNumber = supplierPhnNumber;
+    }
+
+
 }

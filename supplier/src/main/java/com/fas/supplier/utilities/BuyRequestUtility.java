@@ -3,6 +3,7 @@ package com.fas.supplier.utilities;
 import com.fas.supplier.dtos.BuyRequestDetails;
 import com.fas.supplier.dtos.ProductDetails;
 import com.fas.supplier.entities.BuyRequest;
+import com.fas.supplier.entities.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -19,41 +20,44 @@ public class BuyRequestUtility {
     @Value("${farmers.baseUrl}")
     private String baseFarmersUrl;
 
+    @Value("${products.baseUrl}")
+    private String baseProductsUrl;
     @Autowired
     private RestTemplate restTemplate;
 
 
     public ProductDetails getProductDetailsById(Long productId) {
-        String url = baseFarmersUrl + "/products/getById/" +productId;
+        String url = baseProductsUrl + "/findById/" + productId;
         ResponseEntity<ProductDetails> result = restTemplate.getForEntity(url, ProductDetails.class);
         return result.getBody();
     }
 
-    public BuyRequestDetails toBuyRequestDetails(BuyRequest buyRequest) {
+    public BuyRequestDetails toBuyRequestDetails(BuyRequest buyRequest, Supplier supplier) {
         BuyRequestDetails buyRequestDetails = new BuyRequestDetails();
         ProductDetails productDetails = getProductDetailsById(buyRequest.getProductId());
-        buyRequestDetails.setSupplierId(buyRequest.getSupplierId());
+        buyRequestDetails.setId(buyRequest.getId());
         buyRequestDetails.setAskedPrice(buyRequest.getAskedPrice());
         buyRequestDetails.setRequestStatus(buyRequest.getRequestStatus().toString());
 
         buyRequestDetails.setProductId(buyRequest.getProductId());
         buyRequestDetails.setProductName(productDetails.getName());
-        buyRequestDetails.setProductQuantity(productDetails.getQuantity());
-        buyRequestDetails.setProductPrice(productDetails.getPrice());
+        buyRequestDetails.setProductquantity(productDetails.getQuantity());
+        buyRequestDetails.setSellingPrice(productDetails.getSellingPrice());
 
         buyRequestDetails.setFarmerId(productDetails.getFarmerId());
         buyRequestDetails.setFarmerFirstName(productDetails.getFarmerFirstName());
         buyRequestDetails.setFarmerLastName(productDetails.getFarmerLastName());
         buyRequestDetails.setFarmerPincode(productDetails.getFarmerPincode());
         buyRequestDetails.setFarmerPhnNumber(productDetails.getFarmerPhnNumber());
+
+        buyRequestDetails.setSupplierId(buyRequest.getSupplierId());
+        buyRequestDetails.setSupplierFirstName(supplier.getFirstName());
+        buyRequestDetails.setSupplierLastName(supplier.getLastName());
+        buyRequestDetails.setSupplierPincode(supplier.getPincode());
+        buyRequestDetails.setSupplierPhnNumber(supplier.getPhnNumber());
+
         return buyRequestDetails;
     }
 
-    public List<BuyRequestDetails> toBuyRequestDetails(List<BuyRequest> buyRequestsList) {
-        List<BuyRequestDetails> buyRequestDetailsList = new ArrayList<>();
-        for(BuyRequest buyRequest : buyRequestsList){
-            buyRequestDetailsList.add(toBuyRequestDetails(buyRequest));
-        }
-        return  buyRequestDetailsList;
-    }
+
 }

@@ -1,12 +1,17 @@
 package com.fas.supplier.dtos;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
-public class ProposedRequest {
+public class AddBuyRequest {
+
+    @NotNull
     @Min(1)
     private Long productId;
+    @NotNull
     @Min(1)
     private Long supplierId;
+    @NotNull
     @Min(1)
     private Double askedPrice;
 

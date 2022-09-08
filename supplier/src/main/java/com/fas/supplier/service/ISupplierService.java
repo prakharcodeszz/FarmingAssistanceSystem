@@ -22,6 +22,7 @@ public interface ISupplierService {
 
     Supplier updateSupplier(@Valid UpdateSupplier updateSupplier);
 
+    Supplier getSupplierById(@Min(1) Long supplierId);
     List<ProductDetails> getProductsByPincode(@Min(1) @Max(999999) Long pincode);
 
 }

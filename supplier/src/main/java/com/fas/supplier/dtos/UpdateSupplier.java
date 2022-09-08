@@ -65,4 +65,15 @@ public class UpdateSupplier {
     public void setPhnNumber(String phnNumber) {
         this.phnNumber = phnNumber;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateSupplier{" +
+                "username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", pincode=" + pincode +
+                ", phnNumber='" + phnNumber + '\'' +
+                '}';
+    }
 }

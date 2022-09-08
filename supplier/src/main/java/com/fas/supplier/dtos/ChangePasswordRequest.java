@@ -8,6 +8,9 @@ public class ChangePasswordRequest {
     @NotNull
     @Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16")
     private String username;
+    @NotNull
+    @Length(min = 8, max = 16, message = "Password should be of length b/w 6 and 16")
+    private String newPassword;
 
     public String getUsername() {
         return username;
@@ -25,7 +28,5 @@ public class ChangePasswordRequest {
         this.newPassword = newPassword;
     }
 
-    @NotNull
-    @Length(min = 8, max = 16, message = "Password should be of length b/w 6 and 16")
-    private String newPassword;
+
 }
