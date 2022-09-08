@@ -100,3 +100,15 @@
 2022-09-08 14:49:14.782  INFO 14640 --- [http-nio-8000-exec-5] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 392 ms
 2022-09-08 15:01:16.220  INFO 14640 --- [http-nio-8000-exec-2] com.fas.admin.AdminApplication           : prateek100
 2022-09-08 15:01:35.278  INFO 14640 --- [http-nio-8000-exec-6] com.fas.admin.AdminApplication           : prateek100
+2022-09-08 15:49:48.925  INFO 8740 --- [main] com.fas.admin.AdminApplication           : Starting AdminApplication using Java 11.0.13 on PotatoLapy with PID 8740 (C:\Users\singh\Desktop\Workspace\FAS\admin\build\classes\java\main started by singh in C:\Users\singh\Desktop\Workspace\FAS\admin)
+2022-09-08 15:49:48.930  INFO 8740 --- [main] com.fas.admin.AdminApplication           : No active profile set, falling back to 1 default profile: "default"
+2022-09-08 15:49:51.536  INFO 8740 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-08 15:49:51.537  INFO 8740 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-08 15:49:51.694  INFO 8740 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-08 15:49:52.445  INFO 8740 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-08 15:49:52.675  INFO 8740 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-08 15:49:56.143  INFO 8740 --- [main] com.fas.admin.AdminApplication           : Started AdminApplication in 7.865 seconds (JVM running for 8.528)
+2022-09-08 15:49:56.428  INFO 8740 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-08 15:49:57.015  INFO 8740 --- [http-nio-8000-exec-2] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 418 ms
+2022-09-08 15:50:04.960  INFO 8740 --- [http-nio-8000-exec-4] com.fas.admin.AdminApplication           : deleteUser.username: Username should be of length b/w 6 and 16
+2022-09-08 15:51:41.725  INFO 8740 --- [http-nio-8000-exec-7] com.fas.admin.AdminApplication           : Validation failed for argument [0] in public com.fas.admin.entities.User com.fas.admin.controller.AdminController.addUser(com.fas.admin.dtos.AddUser): [Field error in object 'addUser' on field 'username': rejected value [hemant]; codes [Length.addUser.username,Length.username,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUser.username,username]; arguments []; default message [username],16,8]; default message [Username should be of length b/w 6 and 16]] 

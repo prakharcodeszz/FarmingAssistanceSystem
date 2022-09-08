@@ -6,6 +6,7 @@ import com.fas.admin.dtos.LoginCredentials;
 import com.fas.admin.dtos.UserDetails;
 import com.fas.admin.entities.User;
 import com.fas.admin.service.IAdminService;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class AdminController {
      * @implNot logout request with username
      */
     @GetMapping("/logout/{username}")
-    public User logout(@PathVariable String username) {
+    public User logout(@Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16") @PathVariable String username) {
         return service.logout(username);
     }
 
@@ -52,7 +53,7 @@ public class AdminController {
      * @return user
      * @implNot change password request from username
      */
-    @PostMapping("/changePassword")
+    @PutMapping("/changePassword")
     public User changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
         return service.changePassword(changePasswordRequest);
     }
@@ -63,8 +64,20 @@ public class AdminController {
      * @return user
      * @implNot to add user to database
      */
+
+    @DeleteMapping("/delete/{username}")
+    public void deleteUser(@Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16") @PathVariable String username) {
+        service.deleteUser(username);
+    }
+
+    /*
+     * @url admins/addUSer
+     * @param addUser
+     * @return user
+     * @implNot to add user to database
+     */
     @PostMapping("/addUser")
-    public User addUSer(@Valid @RequestBody AddUser addUser) {
+    public User addUser(@Valid @RequestBody AddUser addUser) {
         return service.addUser(addUser);
     }
 
@@ -75,7 +88,9 @@ public class AdminController {
      * @implNot to get user details of username
      */
     @GetMapping("/getUserDetails/{username}")
-    public UserDetails addUSer(@PathVariable String username) {
+    public UserDetails getUser(@PathVariable String username) {
         return service.getUserDetails(username);
     }
+
+
 }

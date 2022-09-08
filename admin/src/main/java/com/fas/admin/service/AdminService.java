@@ -7,6 +7,7 @@ import com.fas.admin.dtos.ChangePasswordRequest;
 import com.fas.admin.dtos.LoginCredentials;
 import com.fas.admin.dtos.UserDetails;
 import com.fas.admin.entities.User;
+import com.fas.admin.exceptions.AdminNotLoggedInException;
 import com.fas.admin.exceptions.InvalidPasswordException;
 import com.fas.admin.exceptions.UserNotFoundException;
 import com.fas.admin.exceptions.UsernameAlreadyExistsException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Main Service class implementation for database repository of the module
@@ -93,12 +95,21 @@ public class AdminService implements IAdminService {
      */
     @Override
     public User addUser(AddUser addUser) {
+
+        Optional<User> userOptional = repository.findById(addUser.getAdminId());
+        if (!userOptional.isPresent())
+            throw new UserNotFoundException("No admin user found for id: " + addUser.getAdminId());
+        User adminUser = userOptional.get();
+        if (!adminUser.getLoggedIn())
+            throw new AdminNotLoggedInException("Admin not logged in for id: " + adminUser.getId());
+
         User user = new User();
         user.setUsername(addUser.getUsername());
         logger.info(addUser.getUsername());
         List<User> userList = repository.getUserWithUsername(addUser.getUsername());
         if (!userList.isEmpty())
             throw new UsernameAlreadyExistsException("The username already exists: " + addUser.getUsername());
+
         user.setPassword(addUser.getPassword());
         UserType userType = adminUtil.getUserType(addUser.getUserType());
         user.setType(userType);
@@ -119,5 +130,15 @@ public class AdminService implements IAdminService {
         userDetails.setUserType(user.getType().toString());
         userDetails.setLoggedIn(user.getLoggedIn());
         return userDetails;
+    }
+
+    @Override
+    public void deleteUser(String username) {
+        UserDetails userDetailsAdmin = getUserDetails(username);
+        if (!userDetailsAdmin.getLoggedIn())
+            throw new AdminNotLoggedInException("Admin not logged in for id: " + userDetailsAdmin.getId());
+
+        UserDetails userDetails = getUserDetails(username);
+        repository.deleteById(userDetails.getId());
     }
 }

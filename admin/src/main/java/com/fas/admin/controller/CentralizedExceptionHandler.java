@@ -1,10 +1,7 @@
 package com.fas.admin.controller;
 
 import com.fas.admin.AdminApplication;
-import com.fas.admin.exceptions.InvalidPasswordException;
-import com.fas.admin.exceptions.InvalidUserTypeException;
-import com.fas.admin.exceptions.UserNotFoundException;
-import com.fas.admin.exceptions.UsernameAlreadyExistsException;
+import com.fas.admin.exceptions.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,6 +27,12 @@ public class CentralizedExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
     public String handleBedNotFound(UserNotFoundException e) {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(AdminNotLoggedInException.class)
+    public String handleAdminNotLoggedInException(AdminNotLoggedInException e) {
         return e.getMessage();
     }
 

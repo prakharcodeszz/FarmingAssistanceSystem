@@ -55,4 +55,5 @@ public interface IAdminService {
      */
     UserDetails getUserDetails(@Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16") String username);
 
+    void deleteUser(String username);
 }

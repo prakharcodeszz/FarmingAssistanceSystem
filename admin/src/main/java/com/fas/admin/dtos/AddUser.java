@@ -5,6 +5,9 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 
 public class AddUser {
+
+    @NotNull
+    private Long adminId;
     @NotNull
     @Length(min = 8, max = 16, message = "Username should be of length b/w 6 and 16")
     private String username;
@@ -14,6 +17,13 @@ public class AddUser {
     @NotNull
     private String userType;
 
+    public Long getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Long adminId) {
+        this.adminId = adminId;
+    }
 
     public String getUsername() {
         return username;
