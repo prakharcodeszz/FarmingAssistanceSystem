@@ -53,7 +53,7 @@ public class AdminController {
      * @return user
      * @implNot change password request from username
      */
-    @PutMapping("/changePassword")
+    @PostMapping("/changePassword")
     public User changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
         return service.changePassword(changePasswordRequest);
     }

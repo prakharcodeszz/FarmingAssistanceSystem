@@ -49,7 +49,8 @@ public class BuyRequestService implements IBuyRequestService {
             throw new ProductNotFoundException("Product not found for id: " + buyRequestDetails.getProductId());
         Product product = productOptional.get();
         product.setSupplierId(buyRequestDetails.getSupplierId());
-        product.setBuyingPrice(buyRequestDetails.getBuyingPrice());
+        product.setBuyingPrice(buyRequestDetails.getAskedPrice());
+        buyRequestDetails.setBuyingPrice(buyRequestDetails.getAskedPrice());
         productRepository.save(product);
         return buyRequestDetails;
     }

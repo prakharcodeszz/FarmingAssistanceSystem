@@ -53,13 +53,15 @@ public class FarmerService implements IFarmersService {
         UserDetails userDetails = farmersUtil.getUserDetails(updateFarmer.getUsername());
         farmersUtil.isUserFarmer(userDetails);
         farmersUtil.isFarmerLoggedIn(userDetails);
+
         List<Farmer> farmersList = farmersRepository.findByUsername(updateFarmer.getUsername());
         Farmer farmer;
-        if (farmersList.isEmpty())
+        if (farmersList.isEmpty() && !farmersRepository.findById(updateFarmer.getId()).isPresent()) {
             farmer = new Farmer();
+            farmer.setUsername(updateFarmer.getUsername());
+        }
         else
             farmer = farmersList.get(0);
-        farmer.setUsername(updateFarmer.getUsername());
         farmer.setFirstName(updateFarmer.getFirstName());
         farmer.setLastName(updateFarmer.getLastName());
         farmer.setPincode(updateFarmer.getPincode());

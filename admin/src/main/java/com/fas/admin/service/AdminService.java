@@ -134,10 +134,6 @@ public class AdminService implements IAdminService {
 
     @Override
     public void deleteUser(String username) {
-        UserDetails userDetailsAdmin = getUserDetails(username);
-        if (!userDetailsAdmin.getLoggedIn())
-            throw new AdminNotLoggedInException("Admin not logged in for id: " + userDetailsAdmin.getId());
-
         UserDetails userDetails = getUserDetails(username);
         repository.deleteById(userDetails.getId());
     }

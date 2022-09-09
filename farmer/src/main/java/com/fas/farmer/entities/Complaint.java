@@ -3,10 +3,7 @@ package com.fas.farmer.entities;
 import com.fas.farmer.constants.ComplaintStatus;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +19,7 @@ public class Complaint {
     private String complaintDescription;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ComplaintStatus status;
 
     public Complaint(Long farmerId, String complaintDescription, ComplaintStatus status) {

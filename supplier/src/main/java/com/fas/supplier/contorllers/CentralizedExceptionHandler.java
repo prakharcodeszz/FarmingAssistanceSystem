@@ -51,6 +51,12 @@ public class CentralizedExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BuyRequestNotPending.class)
+    public String handleBuyRequestNotPending(BuyRequestNotPending e) {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidUserTypeException.class)
     public String handleInvalidUserTypeException(InvalidUserTypeException e) {
         return e.getMessage();

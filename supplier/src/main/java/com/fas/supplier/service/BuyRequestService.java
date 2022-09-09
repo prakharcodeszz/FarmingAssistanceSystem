@@ -7,10 +7,7 @@ import com.fas.supplier.dtos.BuyRequestDetails;
 import com.fas.supplier.dtos.UserDetails;
 import com.fas.supplier.entities.BuyRequest;
 import com.fas.supplier.entities.Supplier;
-import com.fas.supplier.exceptions.BuyRequestIdNotFoundException;
-import com.fas.supplier.exceptions.FarmerNotFoundException;
-import com.fas.supplier.exceptions.ProductNotFoundException;
-import com.fas.supplier.exceptions.SupplierNotFoundException;
+import com.fas.supplier.exceptions.*;
 import com.fas.supplier.repository.IBuyRequestRepository;
 import com.fas.supplier.repository.ISupplierRepository;
 import com.fas.supplier.utilities.BuyRequestUtility;
@@ -89,7 +86,8 @@ public class BuyRequestService implements IBuyRequestService {
     @Override
     public BuyRequestDetails approveBuyRequest(Long buyRequestId) {
         BuyRequest buyRequest = getBuyRequestFromId(buyRequestId);
-
+        if(buyRequest.getRequestStatus()!=RequestStatus.PENDING)
+            throw new BuyRequestNotPending("Buy request is not pending for id: "+ buyRequestId);
         List<BuyRequest> buyRequestList = buyRequestRepository.getBuyRequestByProductId(buyRequest.getProductId());
         for(BuyRequest buyRequestIter : buyRequestList) {
             buyRequestIter.setRequestStatus(RequestStatus.REJECTED);
