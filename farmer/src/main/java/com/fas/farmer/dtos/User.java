@@ -1,10 +1,5 @@
 package com.fas.farmer.dtos;
 
-
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.util.Objects;
 
 /**

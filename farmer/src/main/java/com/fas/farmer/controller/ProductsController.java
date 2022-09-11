@@ -42,25 +42,4 @@ public class ProductsController {
     public List<ProductDetails> getProductsByFarmerId(@PathVariable Long farmerId) {
         return productService.getProductsByFarmerId(farmerId);
     }
-
-
-
-
-//    @GetMapping("/getBuyRequests/{productId}")
-//    public List<BuyRequest> getBuyRequests(@PathVariable Long productId) {
-//        return buyRequestService.getBuyRequests(productId);
-//    }
-//
-//    @GetMapping("/acceptRequest/{buyRequestId}")
-//    public BuyRequest acceptRequest(@PathVariable Long buyRequestId) {
-//        return buyRequestService.acceptRequest(buyRequestId);
-//    }
-//
-//    @GetMapping("/rejectRequest/{buyRequestId}")
-//    public BuyRequest rejectRequest(@PathVariable Long buyRequestId) {
-//        return buyRequestService.rejectRequest(buyRequestId);
-//    }
-//
-
-
 }

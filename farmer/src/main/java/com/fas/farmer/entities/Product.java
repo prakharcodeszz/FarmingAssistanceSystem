@@ -2,7 +2,6 @@ package com.fas.farmer.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.util.Objects;
 
 @Entity
 public class Product {

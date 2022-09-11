@@ -6,8 +6,6 @@ public class ComplaintDetails {
 
     private String request;
 
-    public ComplaintDetails(){}
-
     public Long getId() {
         return id;
     }

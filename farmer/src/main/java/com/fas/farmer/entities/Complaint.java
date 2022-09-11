@@ -58,10 +58,6 @@ public class Complaint {
         return id;
     }
 
-    public void setId(Long id) {
-        id = id;
-    }
-
     public Long getFarmerId() {
         return farmerId;
     }

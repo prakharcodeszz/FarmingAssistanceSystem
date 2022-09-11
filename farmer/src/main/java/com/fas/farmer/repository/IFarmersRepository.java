@@ -12,7 +12,4 @@ public interface IFarmersRepository extends JpaRepository<Farmer,Long> {
 
     @Query("FROM Farmer WHERE username = :username")
     List<Farmer> findByUsername(@Param("username") String username);
-
-//    @Query("from Farmer where id=:id and pincode>=:startPincode and pincode<=:endPincode")
-//    public List<Farmer> findByIdAndPincode(@Param("id") Long id, @Param("startPincode") Long startPincode, @Param("endPincode") Long endPincode);
 }

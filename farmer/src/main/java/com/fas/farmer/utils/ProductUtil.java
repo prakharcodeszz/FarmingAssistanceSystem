@@ -35,10 +35,6 @@ public class ProductUtil {
         productDetails.setFarmerPhnNumber(farmer.getPhnNumber());
         productDetails.setSupplierId(product.getSupplierId());
 
-//        productDetails.setSupplierFirstName(farmer.getSupplierFirstName());
-//        productDetails.setSupplierLastName(farmer.getSupplierLastName());
-//        productDetails.setSupplierPincode(farmer.getSupplierPincode());
-//        productDetails.setSupplierPhnNumber(farmer.getSupplierPhnNumber());
         return productDetails;
     }
 

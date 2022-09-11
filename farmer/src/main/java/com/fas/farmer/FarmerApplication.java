@@ -10,19 +10,18 @@ import org.springframework.web.client.RestTemplate;
  * @Configuration
  * @ComponentScan
  * @EnableAutoConfiguration
- *
  */
 @EnableDiscoveryClient
 @SpringBootApplication
 public class FarmerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FarmerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FarmerApplication.class, args);
+    }
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 }

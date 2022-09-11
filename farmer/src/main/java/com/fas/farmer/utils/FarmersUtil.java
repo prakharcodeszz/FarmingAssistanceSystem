@@ -1,12 +1,9 @@
 package com.fas.farmer.utils;
 
-import com.fas.farmer.FarmerApplication;
 import com.fas.farmer.dtos.*;
 import com.fas.farmer.exceptions.FarmerLoggedOutException;
 import com.fas.farmer.exceptions.FarmerNotFoundException;
 import com.fas.farmer.exceptions.InvalidUserTypeException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +11,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class FarmersUtil {
-    Logger logger = LoggerFactory.getLogger(FarmerApplication.class);
 
     @Value("${admins.baseUrl}")
     private String baseAdminsUrl;
@@ -45,18 +38,8 @@ public class FarmersUtil {
     public User sendChangePasswordRequest(@Valid ChangePasswordRequest changePasswordRequest){
         String url = baseAdminsUrl + "/changePassword";
         ResponseEntity<User> result = restTemplate.postForEntity(url, changePasswordRequest, User.class);
-        logger.info(result.toString());
         return result.getBody();
     }
-
-//    public List<Supplier> getNearbySuppliers(Long pincode) {
-//        String url = baseSuppliersUrl +"/getByPincode/" +pincode;
-//        ResponseEntity<Supplier[]> result = restTemplate.getForEntity(url, Supplier[].class);
-//        Supplier[] arrayList = result.getBody();
-//        List<Supplier> suppliersList = new ArrayList<>();
-//        Collections.addAll(suppliersList, arrayList);
-//        return suppliersList;
-//    }
 
     public UserType getUserType(String userType) {
         for (UserType type : UserType.values())
@@ -68,7 +51,6 @@ public class FarmersUtil {
     public UserDetails getUserDetails(String username){
         String url = baseAdminsUrl + "/getUserDetails/" + username;
         ResponseEntity<UserDetails> result = restTemplate.getForEntity(url, UserDetails.class);
-        logger.info(result.getBody().toString());
         return result.getBody();
     }
 
@@ -79,7 +61,7 @@ public class FarmersUtil {
     }
 
     public void isFarmerLoggedIn(UserDetails userDetails){
-        if (!userDetails.getLoggedIn())
+        if (Boolean.FALSE.equals(userDetails.getLoggedIn()))
             throw new FarmerLoggedOutException("Farmer for username is not logged in: " + userDetails.getUsername());
     }
 
