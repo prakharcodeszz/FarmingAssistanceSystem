@@ -4,6 +4,7 @@ import com.fas.farmer.exceptions.BuyRequestNotFoundException;
 import com.fas.farmer.exceptions.FarmerLoggedOutException;
 import com.fas.farmer.exceptions.FarmerNotFoundException;
 import com.fas.farmer.exceptions.ProductNotFoundException;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,6 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.ConstraintViolationException;
 import java.net.UnknownHostException;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 @Component
@@ -44,9 +46,15 @@ public class CentralExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ConstraintViolationException.class, MethodArgumentNotValidException.class, UnknownHostException.class, HttpClientErrorException.class})
+    @ExceptionHandler({ConstraintViolationException.class, UnknownHostException.class, HttpClientErrorException.class})
     public String handleInvalid(Exception e) {
         return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public String handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        return ex.getBindingResult().getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
     }
 }
 

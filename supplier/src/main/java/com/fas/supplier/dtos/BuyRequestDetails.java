@@ -1,12 +1,5 @@
 package com.fas.supplier.dtos;
 
-import com.fas.supplier.constants.RequestStatus;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class BuyRequestDetails {
 
     private Long id;

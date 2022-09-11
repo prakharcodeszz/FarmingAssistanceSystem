@@ -2,13 +2,9 @@ package com.fas.supplier.dtos;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 public class UpdateSupplier {
     @Length(min = 6, max = 16, message = "Username should be of length b/w 6 and 16")

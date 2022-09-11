@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/suppliers")
@@ -38,7 +37,13 @@ public class SupplierController {
     }
 
     @PostMapping("/updateSupplier")
-    public Supplier updateSupplier(@Valid @RequestBody UpdateSupplier updateSupplier){
+    public Supplier updateSupplier(@Valid @RequestBody UpdateSupplier updateSupplier) {
         return supplierService.updateSupplier(updateSupplier);
     }
+
+    @GetMapping("/findById/{id}")
+    public Supplier findSupplierById(@PathVariable Long id) {
+        return supplierService.getSupplierById(id);
+    }
+
 }

@@ -1,11 +1,9 @@
 package com.fas.supplier.contorllers;
 
-import com.fas.supplier.SupplierApplication;
 import com.fas.supplier.dtos.AddBuyRequest;
 import com.fas.supplier.dtos.BuyRequestDetails;
 import com.fas.supplier.service.IBuyRequestService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +19,6 @@ public class BuyRequestController {
     @Autowired
     private IBuyRequestService buyRequestService;
 
-    Logger logger = LoggerFactory.getLogger(SupplierApplication.class);
-
-
     @PostMapping("/addRequest")
     public BuyRequestDetails getById(@Valid @RequestBody AddBuyRequest addBuyRequest) {
         return buyRequestService.sendBuyRequest(addBuyRequest);
@@ -34,9 +29,9 @@ public class BuyRequestController {
         return buyRequestService.getBuyRequestsById(buyRequestId);
     }
 
+    @Hidden
     @GetMapping("/getByProductId/{productId}")
     public List<BuyRequestDetails> getByProductId(@PathVariable Long productId) {
-        logger.info(productId.toString());
         return buyRequestService.getBuyRequestByProductId(productId);
     }
 
@@ -45,11 +40,13 @@ public class BuyRequestController {
         return buyRequestService.getBuyRequestBySupplier(supplierId);
     }
 
+    @Hidden
     @GetMapping("/approveRequest/{requestId}")
     public BuyRequestDetails approveRequest(@PathVariable Long requestId) {
         return buyRequestService.approveBuyRequest(requestId);
     }
 
+    @Hidden
     @GetMapping("/rejectRequest/{requestId}")
     public BuyRequestDetails rejectRequest(@PathVariable Long requestId) {
         return buyRequestService.rejectBuyRequest(requestId);

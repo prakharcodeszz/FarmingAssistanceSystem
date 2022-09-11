@@ -1,27 +1,18 @@
 package com.fas.supplier.utilities;
 
-import com.fas.supplier.SupplierApplication;
 import com.fas.supplier.dtos.*;
-import com.fas.supplier.exceptions.FarmerNotFoundException;
 import com.fas.supplier.exceptions.InvalidUserTypeException;
 import com.fas.supplier.exceptions.SupplierLoggedOutException;
 import com.fas.supplier.exceptions.SupplierNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 @Component
 public class SupplierUtility {
 
-    Logger logger = LoggerFactory.getLogger(SupplierApplication.class);
 
     @Value("${admins.baseUrl}")
     private String baseAdminsUrl;
@@ -67,7 +58,7 @@ public class SupplierUtility {
     }
 
     public void isSupplierLoggedIn(UserDetails userDetails) {
-        if (!userDetails.getLoggedIn())
+        if (Boolean.FALSE.equals(userDetails.getLoggedIn()))
             throw new SupplierLoggedOutException("Supplier for username is not logged in: " + userDetails.getUsername());
     }
 

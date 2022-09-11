@@ -1,6 +1,8 @@
 package com.fas.farmer.service;
 
 import com.fas.farmer.dtos.BuyRequestDetails;
+import com.fas.farmer.dtos.ProductDetails;
+import com.fas.farmer.dtos.SellProductRequest;
 import com.fas.farmer.dtos.UserDetails;
 import com.fas.farmer.entities.Farmer;
 import com.fas.farmer.entities.Product;
@@ -31,6 +33,9 @@ public class BuyRequestService implements IBuyRequestService {
     @Autowired
     private IProductRepository productRepository;
 
+    @Autowired
+    private IProductService iProductService;
+
     @Override
     public List<BuyRequestDetails> getRequestForProductId(Long productId) {
 
@@ -41,17 +46,23 @@ public class BuyRequestService implements IBuyRequestService {
 
         return buyRequestUtil.getRequestForProductId(productId);
     }
+
     @Override
     public BuyRequestDetails approveRequest(Long requestId) {
         BuyRequestDetails buyRequestDetails = buyRequestUtil.approveRequest(requestId);
+
         Optional<Product> productOptional = productRepository.findById(buyRequestDetails.getProductId());
         if (!productOptional.isPresent())
             throw new ProductNotFoundException("Product not found for id: " + buyRequestDetails.getProductId());
         Product product = productOptional.get();
-        product.setSupplierId(buyRequestDetails.getSupplierId());
-        product.setBuyingPrice(buyRequestDetails.getAskedPrice());
-        buyRequestDetails.setBuyingPrice(buyRequestDetails.getAskedPrice());
-        productRepository.save(product);
+        SellProductRequest sellProductRequest = new SellProductRequest();
+        sellProductRequest.setProductId(product.getId());
+        sellProductRequest.setSupplierId(buyRequestDetails.getSupplierId());
+        sellProductRequest.setBuyingPrice(buyRequestDetails.getAskedPrice());
+        ProductDetails productDetails = iProductService.sellProduct(sellProductRequest);
+
+        buyRequestDetails.setBuyingPrice(productDetails.getBuyingPrice());
+
         return buyRequestDetails;
     }
 

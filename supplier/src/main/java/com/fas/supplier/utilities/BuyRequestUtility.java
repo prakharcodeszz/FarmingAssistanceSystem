@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class BuyRequestUtility {
@@ -44,6 +42,7 @@ public class BuyRequestUtility {
         buyRequestDetails.setProductName(productDetails.getName());
         buyRequestDetails.setProductquantity(productDetails.getQuantity());
         buyRequestDetails.setSellingPrice(productDetails.getSellingPrice());
+        buyRequestDetails.setBuyingPrice(productDetails.getBuyingPrice());
 
         buyRequestDetails.setFarmerId(productDetails.getFarmerId());
         buyRequestDetails.setFarmerFirstName(productDetails.getFarmerFirstName());

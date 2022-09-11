@@ -1,14 +1,10 @@
 package com.fas.supplier.service;
 
-import com.fas.supplier.SupplierApplication;
 import com.fas.supplier.dtos.*;
-import com.fas.supplier.entities.BuyRequest;
 import com.fas.supplier.entities.Supplier;
 import com.fas.supplier.exceptions.SupplierNotFoundException;
 import com.fas.supplier.repository.ISupplierRepository;
 import com.fas.supplier.utilities.SupplierUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +16,6 @@ import java.util.Optional;
 @Service
 public class SupplierService implements ISupplierService {
 
-    Logger logger = LoggerFactory.getLogger(SupplierApplication.class);
 
     @Autowired
     private SupplierUtility suppliersUtil;

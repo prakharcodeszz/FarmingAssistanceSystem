@@ -1,6 +1,5 @@
 package com.fas.supplier.service;
 
-import com.fas.supplier.SupplierApplication;
 import com.fas.supplier.constants.RequestStatus;
 import com.fas.supplier.dtos.AddBuyRequest;
 import com.fas.supplier.dtos.BuyRequestDetails;
@@ -12,13 +11,10 @@ import com.fas.supplier.repository.IBuyRequestRepository;
 import com.fas.supplier.repository.ISupplierRepository;
 import com.fas.supplier.utilities.BuyRequestUtility;
 import com.fas.supplier.utilities.SupplierUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +22,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class BuyRequestService implements IBuyRequestService {
-
-    Logger logger = LoggerFactory.getLogger(SupplierApplication.class);
 
     @Autowired
     private BuyRequestUtility buyRequestUtility;
@@ -72,7 +66,7 @@ public class BuyRequestService implements IBuyRequestService {
     public List<BuyRequestDetails> getBuyRequestByProductId(Long productId) {
         List<BuyRequest> buyRequestList = buyRequestRepository.getBuyRequestByProductId(productId);
         if(buyRequestList.isEmpty())
-            throw new ProductNotFoundException("Product not found for id: "+productId);
+            throw new NoBuyRequestsFoundException("No buy requests found for product id: "+productId);
 
         List<BuyRequestDetails> buyRequestDetailsList = new ArrayList<>();
         for (BuyRequest buyRequest : buyRequestList) {
@@ -89,9 +83,9 @@ public class BuyRequestService implements IBuyRequestService {
         if(buyRequest.getRequestStatus()!=RequestStatus.PENDING)
             throw new BuyRequestNotPending("Buy request is not pending for id: "+ buyRequestId);
         List<BuyRequest> buyRequestList = buyRequestRepository.getBuyRequestByProductId(buyRequest.getProductId());
-        for(BuyRequest buyRequestIter : buyRequestList) {
-            buyRequestIter.setRequestStatus(RequestStatus.REJECTED);
-            buyRequestRepository.save(buyRequestIter);
+        for(BuyRequest buyRequestInter : buyRequestList) {
+            buyRequestInter.setRequestStatus(RequestStatus.REJECTED);
+            buyRequestRepository.save(buyRequestInter);
         }
 
         buyRequest.setRequestStatus(RequestStatus.APPROVED);
@@ -105,6 +99,8 @@ public class BuyRequestService implements IBuyRequestService {
     @Override
     public BuyRequestDetails rejectBuyRequest(Long buyRequestId) {
         BuyRequest buyRequest = getBuyRequestFromId(buyRequestId);
+        if(buyRequest.getRequestStatus()!=RequestStatus.PENDING)
+            throw new BuyRequestNotPending("Buy request is not pending for id: "+ buyRequestId);
         buyRequest.setRequestStatus(RequestStatus.REJECTED);
         buyRequestRepository.save(buyRequest);
         Supplier supplier = getSupplierFromId(buyRequest.getSupplierId());
@@ -124,8 +120,8 @@ public class BuyRequestService implements IBuyRequestService {
 
         List<BuyRequestDetails> buyRequestDetailsList = new ArrayList<>();
         for (BuyRequest buyRequest : buyRequestList) {
-            Supplier supplierIter = getSupplierFromId(buyRequest.getSupplierId());
-            BuyRequestDetails buyRequestDetails = buyRequestUtility.toBuyRequestDetails(buyRequest, supplierIter);
+            Supplier supplierItem = getSupplierFromId(buyRequest.getSupplierId());
+            BuyRequestDetails buyRequestDetails = buyRequestUtility.toBuyRequestDetails(buyRequest, supplierItem);
             buyRequestDetailsList.add(buyRequestDetails);
         }
         return buyRequestDetailsList;

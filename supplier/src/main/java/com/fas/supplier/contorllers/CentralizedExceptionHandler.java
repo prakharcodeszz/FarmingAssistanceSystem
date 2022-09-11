@@ -1,9 +1,7 @@
 package com.fas.supplier.contorllers;
 
-import com.fas.supplier.SupplierApplication;
 import com.fas.supplier.exceptions.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.ConstraintViolationException;
 import java.net.UnknownHostException;
+import java.util.stream.Collectors;
 
 /**
  * Central Controller class exception to be thrown to REST end points
@@ -23,8 +22,6 @@ import java.net.UnknownHostException;
 @RestControllerAdvice
 @Component
 public class CentralizedExceptionHandler {
-
-    Logger logger = LoggerFactory.getLogger(SupplierApplication.class);
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(FarmerNotFoundException.class)
@@ -50,6 +47,12 @@ public class CentralizedExceptionHandler {
         return e.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoBuyRequestsFoundException.class)
+    public String handleNoBuyRequestsFoundException(NoBuyRequestsFoundException e) {
+        return e.getMessage();
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BuyRequestNotPending.class)
     public String handleBuyRequestNotPending(BuyRequestNotPending e) {
@@ -69,8 +72,14 @@ public class CentralizedExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ConstraintViolationException.class, MethodArgumentNotValidException.class, UnknownHostException.class, HttpClientErrorException.class})
+    @ExceptionHandler({ConstraintViolationException.class, UnknownHostException.class, HttpClientErrorException.class})
     public String handleInvalid(Exception e) {
         return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public String handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        return ex.getBindingResult().getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
     }
 }

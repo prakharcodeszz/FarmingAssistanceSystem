@@ -1,7 +1,5 @@
 package com.fas.supplier.dtos;
 
-import java.util.Objects;
-
 public class ProductDetails {
 
     private Long id;

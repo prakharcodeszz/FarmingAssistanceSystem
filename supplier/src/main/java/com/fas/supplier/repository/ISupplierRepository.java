@@ -9,9 +9,6 @@ import java.util.List;
 
 public interface ISupplierRepository extends JpaRepository<Supplier, Long> {
 
-//    @Query("FROM Supplier WHERE pincode>=:startPincode and pincode<=:endPincode")
-//    public List<Supplier> getNearbySuppliers(@Param("startPincode") Long startPincode, @Param("endPincode") Long endPincode);
-
     @Query("FROM Supplier WHERE username = :username")
     List<Supplier> findByUsername(@Param("username") String username);
 

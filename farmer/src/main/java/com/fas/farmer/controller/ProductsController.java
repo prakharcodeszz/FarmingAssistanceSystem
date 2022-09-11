@@ -2,6 +2,7 @@ package com.fas.farmer.controller;
 
 import com.fas.farmer.dtos.*;
 import com.fas.farmer.service.IProductService;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +28,11 @@ public class ProductsController {
         return productService.updateProduct(updateProductRequest);
     }
 
-    @PostMapping("/sellProduct")
-    public ProductDetails sellProduct(@Valid @RequestBody SellProductRequest sellProductRequest) {
-        return productService.sellProduct(sellProductRequest);
-    }
-
     @GetMapping("/findById/{productId}")
     public ProductDetails getProductById(@PathVariable Long productId) {
         return productService.getProductDetails(productId);
     }
+    @Hidden
     @GetMapping("/findByPincode/{pincode}")
     public List<ProductDetails> getProductsByPincode(@PathVariable Long pincode) {
         return productService.getProductsByPincode(pincode);

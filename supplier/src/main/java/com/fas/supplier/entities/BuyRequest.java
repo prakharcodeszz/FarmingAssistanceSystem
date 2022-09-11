@@ -1,7 +1,6 @@
 package com.fas.supplier.entities;
 
 import com.fas.supplier.constants.RequestStatus;
-import com.sun.org.apache.xpath.internal.operations.String;
 
 import javax.persistence.*;
 

@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.util.List;
 
 @Service
 @Validated
@@ -21,5 +19,4 @@ public interface ISupplierService {
     Supplier updateSupplier(@Valid UpdateSupplier updateSupplier);
     Supplier getSupplierById(@Min(1) Long supplierId);
 
-    
 }
