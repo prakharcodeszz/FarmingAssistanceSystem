@@ -1,6 +1,5 @@
 package com.fas.admin.service;
 
-import com.fas.admin.AdminApplication;
 import com.fas.admin.constants.UserType;
 import com.fas.admin.dtos.AddUser;
 import com.fas.admin.dtos.ChangePasswordRequest;
@@ -13,8 +12,6 @@ import com.fas.admin.exceptions.UserNotFoundException;
 import com.fas.admin.exceptions.UsernameAlreadyExistsException;
 import com.fas.admin.repository.IAdminRepository;
 import com.fas.admin.utilites.AdminUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +28,6 @@ import java.util.Optional;
 @Service
 public class AdminService implements IAdminService {
 
-    Logger logger = LoggerFactory.getLogger(AdminApplication.class);
     @Autowired
     private IAdminRepository repository;
     @Autowired
@@ -45,7 +41,6 @@ public class AdminService implements IAdminService {
      */
     @Override
     public User loginWithCredentials(LoginCredentials loginCredentials) {
-        logger.info(loginCredentials.getUsername());
         List<User> usersList = repository.getUserWithUsername(loginCredentials.getUsername());
         if (usersList.isEmpty())
             throw new UserNotFoundException("No user found for username: " + loginCredentials.getUsername());
@@ -64,7 +59,6 @@ public class AdminService implements IAdminService {
      */
     @Override
     public User logout(String username) {
-        logger.info(username);
         List<User> usersList = repository.getUserWithUsername(username);
         if (usersList.isEmpty())
             throw new UserNotFoundException("No user found for username: " + username);
@@ -100,12 +94,11 @@ public class AdminService implements IAdminService {
         if (!userOptional.isPresent())
             throw new UserNotFoundException("No admin user found for id: " + addUser.getAdminId());
         User adminUser = userOptional.get();
-        if (!adminUser.getLoggedIn())
+        if (Boolean.FALSE.equals(adminUser.getLoggedIn()))
             throw new AdminNotLoggedInException("Admin not logged in for id: " + adminUser.getId());
 
         User user = new User();
         user.setUsername(addUser.getUsername());
-        logger.info(addUser.getUsername());
         List<User> userList = repository.getUserWithUsername(addUser.getUsername());
         if (!userList.isEmpty())
             throw new UsernameAlreadyExistsException("The username already exists: " + addUser.getUsername());
