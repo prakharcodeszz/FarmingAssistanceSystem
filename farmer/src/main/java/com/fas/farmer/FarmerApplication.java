@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * @ComponentScan
  * @EnableAutoConfiguration
  */
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @SpringBootApplication
 public class FarmerApplication {
 
