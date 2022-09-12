@@ -90,13 +90,14 @@ public class AdminService implements IAdminService {
     @Override
     public User addUser(AddUser addUser) {
 
-        Optional<User> userOptional = repository.findById(addUser.getAdminId());
-        if (!userOptional.isPresent())
-            throw new UserNotFoundException("No admin user found for id: " + addUser.getAdminId());
-        User adminUser = userOptional.get();
-        if (Boolean.FALSE.equals(adminUser.getLoggedIn()))
-            throw new AdminNotLoggedInException("Admin not logged in for id: " + adminUser.getId());
-
+        if (adminUtil.getUserType(addUser.getUserType()) != UserType.ADMIN) {
+            Optional<User> userOptional = repository.findById(addUser.getAdminId());
+            if (!userOptional.isPresent())
+                throw new UserNotFoundException("No admin user found for id: " + addUser.getAdminId());
+            User adminUser = userOptional.get();
+            if (Boolean.FALSE.equals(adminUser.getLoggedIn()))
+                throw new AdminNotLoggedInException("Admin not logged in for id: " + adminUser.getId());
+        }
         User user = new User();
         user.setUsername(addUser.getUsername());
         List<User> userList = repository.getUserWithUsername(addUser.getUsername());
