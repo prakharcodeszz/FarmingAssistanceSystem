@@ -1,0 +1,23 @@
+apiVersion: apps/v1 #version of the Kubernetes API you're using to create this object
+kind: Deployment  #What kind of object you want to create
+metadata: #deployment name, helps uniquely identify the object
+   name: supplier-dpl
+
+spec:  
+  selector:
+    matchLabels:
+      app: supplier
+
+
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: supplier
+    spec:   #What state you desire for the object
+
+      containers:
+      - name: supplier-cnt #container name
+        image: 'prakhar900/supplier:v1' #image name of moudule
+        ports:
+        - containerPort: 8300 # bedms module runs on port 8300

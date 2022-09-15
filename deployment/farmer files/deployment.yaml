@@ -1,0 +1,23 @@
+apiVersion: apps/v1 #version of the Kubernetes API you're using to create this object
+kind: Deployment  #What kind of object you want to create
+metadata: #deployment name, helps uniquely identify the object
+   name: farmer-dpl
+
+spec:  
+  selector:
+    matchLabels:
+      app: farmer
+
+
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: farmer
+    spec:   #What state you desire for the object
+
+      containers:
+      - name: farmer-cnt #container name
+        image: 'prakhar900/farmer:v1' #image name of moudule
+        ports:
+        - containerPort: 8100 # bedms module runs on port 8100
